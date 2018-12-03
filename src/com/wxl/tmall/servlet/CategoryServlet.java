@@ -54,7 +54,7 @@ public class CategoryServlet extends BackBaseServlet {
     public String delete(HttpServletRequest request, HttpServletResponse response, Page page) {
         int id = Integer.parseInt(request.getParameter("id"));
         categoryDAO.delete(id);
-        return "@admin_category_delete";
+        return "@admin_category_list";
     }
 
     @Override
