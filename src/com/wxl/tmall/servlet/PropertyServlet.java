@@ -24,7 +24,7 @@ public class PropertyServlet extends BackBaseServlet {
         property.setCategory(category);
         property.setName(name);
         propertyDAO.add(property);
-        return "@admin_property_list?cid+"+cid;
+        return "@admin_property_list?cid="+cid;
     }
 
     @Override
@@ -63,10 +63,13 @@ public class PropertyServlet extends BackBaseServlet {
     public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
         int cid = Integer.parseInt(request.getParameter("cid"));
         Category c = categoryDAO.get(cid);
+        System.out.println(cid);
 
         List<Property> ps = propertyDAO.list(cid,page.getStart(),page.getCount());
+        System.out.println("test=====>"+ps.size());
         int total = propertyDAO.getTotal(cid);
         page.setTotal(total);
+        //page传递cid
         page.setParam("&cid="+cid);
         request.setAttribute("ps",ps);
         request.setAttribute("c",c);

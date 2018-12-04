@@ -32,11 +32,18 @@ public class PropertyDAO {
     //查询某个分类下的属性对象
     public List<Property> list(int cid, int start, int count){
         List<Property> beans = new ArrayList<>();
-        String sql = "select * from property where cid = "+ cid;
+        String sql = "select * from property where cid = "+ cid+" limit "+start +","+count;
         try(Connection c = DBUtil.getConnection();
         PreparedStatement ps = c.prepareStatement(sql);
         ){
-
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Property bean = new Property();
+                bean.setId(rs.getInt("id"));
+                bean.setCategory(new CategoryDAO().get(cid));
+                bean.setName(rs.getString("name"));
+                beans.add(bean);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

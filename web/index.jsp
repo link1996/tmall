@@ -6,5 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
-  response.sendRedirect("tmall/admin_category_list");
+
+  response.sendRedirect("/forehome");
 %>
