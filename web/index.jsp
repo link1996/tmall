@@ -6,5 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
-  response.sendRedirect("/forehome");
+  String contextPath = request.getServletContext().getContextPath();
+  response.sendRedirect(contextPath+"/forehome");
 %>

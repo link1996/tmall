@@ -29,6 +29,6 @@
         <a href="forebought">我的订单</a>
         <a href="forecart">
         <span class="glyphicon glyphicon-shopping-cart redColor" ></span>
-        购物车<strong>0</strong>件</a>
+        购物车<strong>${cartTotalItemNumber}</strong>件</a>
     </span>
 </nav>
