@@ -1,5 +1,7 @@
 package com.wxl.tmall.dao;
 
+import com.wxl.tmall.bean.Product;
+import com.wxl.tmall.bean.Property;
 import com.wxl.tmall.bean.PropertyValue;
 import com.wxl.tmall.util.DBUtil;
 
@@ -127,6 +129,38 @@ public class PropertyValueDAO {
                 beans.add(bean);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return beans;
+    }
+    public List<PropertyValue> list(int pid) {
+        List<PropertyValue> beans = new ArrayList<PropertyValue>();
+
+        String sql = "select * from PropertyValue where pid = ? order by ptid desc";
+
+        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+
+            ps.setInt(1, pid);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                PropertyValue bean = new PropertyValue();
+                int id = rs.getInt(1);
+
+                int ptid = rs.getInt("ptid");
+                String value = rs.getString("value");
+
+                Product product = new ProductDAO().get(pid);
+                Property property = new PropertyDAO().get(ptid);
+                bean.setProduct(product);
+                bean.setProperty(property);
+                bean.setValue(value);
+                bean.setId(id);
+                beans.add(bean);
+            }
+        } catch (SQLException e) {
+
             e.printStackTrace();
         }
         return beans;

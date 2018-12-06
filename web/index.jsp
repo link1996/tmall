@@ -6,6 +6,5 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
-
   response.sendRedirect("/forehome");
 %>

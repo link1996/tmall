@@ -144,9 +144,12 @@ public class UserDAO {
     //判断账号是否重复  使用get哈哈哈
     //根据用户名获取对象
     public User get(String name){
+        System.out.println("sql"+name);
         User bean = null;
-        String  sql = "select * from user where name = "+name;
+        String  sql = "select * from user where name = ?";
+        //String  sql = "select * from user where name = "+ name;
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1,name);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 bean = new User();
@@ -167,8 +170,12 @@ public class UserDAO {
     //根据账号密码获取对象 在内存中比较
     public User get(String name,String password){
         User bean = null;
-        String  sql = "select * from user where name = "+name+" and password = "+password;
+        //String  sql = "select * from user where name = "+name+" and password = "+password;
+        System.out.println(name+password);
+        String  sql = "select * from user where name = ? and password = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1,name);
+            ps.setString(2,password);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 bean = new User();

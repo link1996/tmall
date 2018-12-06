@@ -22,12 +22,12 @@
     </c:if>
     <c:if test="${!empty user}">
         <a href="login.jsp">${user.name}</a>
-        <a href="#forelogout">退出</a>
+        <a href="forelogout">退出</a>
     </c:if>
 
     <span class="pull-right">
-        <a href="#forebought">我的订单</a>
-        <a href="#forecart">
+        <a href="forebought">我的订单</a>
+        <a href="forecart">
         <span class="glyphicon glyphicon-shopping-cart redColor" ></span>
         购物车<strong>0</strong>件</a>
     </span>
